@@ -60,7 +60,7 @@ function addEmployee() {
       {
       name: 'first',
       type: 'input',
-      choice: "Enter Employee's First Name"
+      message: "Enter Employee's First Name"
       },
       {
       name: 'last',
@@ -170,9 +170,9 @@ function viewEmployees(){
   connection.query("SELECT * FROM employees", (err,data) => {
     if(err) throw err;
     console.table(data);
-  });
- 
+  }); 
 };
+
 function viewDepartments(){
   connection.query("SELECT * FROM department", (err,data) => {
     if(err) throw err;
@@ -187,13 +187,39 @@ function viewRoles(){
   });
 };
 
-// function other() {
-//   inquirer
-//     .prompt({
-
-//     })
-
-
-// }
+function other() {
+  inquirer
+    .prompt([{ 
+        name: 'newAction',
+        type: 'list',
+        message: 'Please Select',
+        choices: [
+          "Enter Employee's Salary",
+          'View Employees by Manager',
+          'Delete Departments',
+          'Delete Roles',
+          'Delete Employees'        ]
+    }   
+   ])   
+   .then(function(answer) {
+      switch (answer.newAction) {
+        case "Update Employees Manager":
+          updateManager();
+          break;
+        case "View Employees by Manager":
+          viewEmployeeByManager();
+          break;
+        case "Delete Departments":
+          departmentDel();
+          break;
+        case "Delete Roles":
+          rolesDel();
+          break;
+        case "Delete Employees":
+          employeeDel();
+          break;
+      };
+   });
+  };
 
 runSearch();
