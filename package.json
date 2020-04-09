@@ -1,5 +1,5 @@
 {
-  "name": "EmployeeTracker",
+  "name": "employeetracker",
   "version": "1.0.0",
   "description": "Unit 12 MySQL Homework: Employee Tracker",
   "main": "app.js",
@@ -16,5 +16,9 @@
   "bugs": {
     "url": "https://github.com/Dritchie3/EmployeeTracker/issues"
   },
-  "homepage": "https://github.com/Dritchie3/EmployeeTracker#readme"
+  "homepage": "https://github.com/Dritchie3/EmployeeTracker#readme",
+  "dependencies": {
+    "inquirer": "^7.1.0",
+    "mysql": "^2.18.1"
+  }
 }

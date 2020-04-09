@@ -1,12 +1,13 @@
-var mysql = require("mysql");
-var inquirer = require("inquirer");
-var connection = mysql.createConnection({
+const mysql = require("mysql");
+const inquirer = require("inquirer");
+const connection = mysql.createConnection({
 host: "localhost",
 port: 3306,
 user: "root",
 password: "!123Bobby123",
-database: "employeesDB"
+database: "employeeDB"
 });
+
 function runSearch(){
     inquirer
     .prompt({
@@ -20,6 +21,7 @@ function runSearch(){
             "View Employees",
             "View Departments",
             "View Roles",
+            "Other",
             "exit"
         ]
     })
@@ -34,80 +36,164 @@ function runSearch(){
         case "Add Role":
           addRole();
           break;
-        case "View Employee":
-          viewEmployee();
+        case "View Employees":
+          viewEmployees();
           break;
-        case "View Department":
-          viewDepartment();
+        case "View Departments":
+          viewDepartments();
           break;
-        case "View Role":
-          viewRole();
+        case "View Roles":
+          viewRoles();
+          break;
+        case "Other":
+          other();
           break;
         case "exit":
           connection.end();
           break;
         }
-      });
+      })
+  };
+function addEmployee() {
+  inquirer
+    .prompt([
+      {
+      name: 'first',
+      type: 'input',
+      choice: "Enter Employee's First Name"
+      },
+      {
+      name: 'last',
+      type: 'input',
+      message: "Enter Employee's Last Name"
+      },
+      {
+      name: 'role',
+      type: 'input',
+      message: "Enter Employee Role"
+      },
+      {
+      name: 'department',
+      type: 'input',
+      message: "Enter Employee's Department"
+      },
+      {
+      name: 'manager',
+      type: 'input',
+      message: "Enter Employees Manager"
+      },
+      {
+      name: 'salary',
+      type: 'input',
+      message: "Enter Employee's Salary"
+      }
+    ])
+    .then(function (response) {
+      firstName = response.first;
+      lastName = response.last;
+      role = response.role;
+      department = response.department;
+      manager = response.manager;
+      salary = response.salary;
+            
+let query = connection.query(
+  "INSERT INTO employees SET ?",
+  { first_name: firstName,
+    last_name: lastName,
+    role_id: role,
+    manager: manager
+  },
+  function(err,res) {
+    if(err) throw err;
   }
-
-function addEmployee(){
-
+);
+})  
 };
+
 function addDepartment(){
+  inquirer 
+    .prompt([{
+      name: 'department',
+      type: 'input',
+      message: "Enter Department"
+    }])
+    .then(function(response2) {
+       department = response2.department;
+    
+  let query = connection.query(
+      "INSERT INTO department SET ?",
+      { department: department
+      },
+      function(err,res) {
+        if(err) throw err;
+      })
+    })     
+    };  
 
-};
 function addRole(){
-
+  inquirer
+    .prompt([{
+      name: 'role',
+      type: 'input',
+      message: "Enter New Role"
+    },
+    {
+      name: 'salary',
+      type: 'input',
+      message: "Enter Salary"
+    },
+    {
+      name: 'department',
+      type: 'input',
+      message: "Enter Department"
+    },
+  ])
+    .then(function(response3){
+      role = response3.role;
+      salary = response3.salary;
+      department = response3.department;
+   
+let query = connection.query(
+    "INSERT INTO role SET ?",
+    { role_id: role,
+      salary: salary,
+      department: department
+    },
+    function(err,res) {
+      if(err) throw err;
+    }
+  );
+  })  
 };
-function viewEmployee(){
 
+function viewEmployees(){
+  connection.query("SELECT * FROM employees", (err,data) => {
+    if(err) throw err;
+    console.table(data);
+  });
+ 
 };
-function viewDepartment(){
-
+function viewDepartments(){
+  connection.query("SELECT * FROM department", (err,data) => {
+    if(err) throw err;
+    console.table(data);
+  });
 };
-function viewRole(){
 
+function viewRoles(){
+  connection.query("SELECT * FROM role", (err,data) => {
+    if(err) throw err;
+    console.table(data);
+  });
 };
 
-
-// function artistSearch(){
-// inquirer
-// .prompt({
-//     name: "artist",
-//     type: "input",
-//     message: "What artist would you like to search for?"
-// })
-// .then(function(answer){
-//     var query = "SELECT ranking, title, year FROM Top5000 WHERE ?";
-//     connection.query(query, {  artist: answer.artist  }, function(err, res){
-//         if (err) throw err;
-//         for(var i = 0; i < res.length; i++){
-//             console.log("Ranking: " + res[i].ranking + " || Title: " + res[i].title + " || Year: " + res[i].year);
-//         }
-//         runSearch();
-//     });
-// });
-// }
-// function multiSearch(){
-// }
-// function rangeSearch(){
-//     inquirer
+// function other() {
+//   inquirer
 //     .prompt({
-//         name: "start",
-//         type: "input",
-//         message: "Enter starting year"
-//     },
-//     {
-//         name: "end",
-//         type: "input",
-//         message: "Enter ending year"
-//     }
-//     )
+
+//     })
+
+
 // }
-// function songSearch(){
-// inquirer
-// .prompt({
-//     name: "song",
-//     type: "input",
-//     message: "What song would you like to search for?"
-// })
+
+runSearch();
