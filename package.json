@@ -1,0 +1,20 @@
+{
+  "name": "EmployeeTracker",
+  "version": "1.0.0",
+  "description": "Unit 12 MySQL Homework: Employee Tracker",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Dritchie3/EmployeeTracker.git"
+  },
+  "keywords": [],
+  "author": "Doug Ritchie",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Dritchie3/EmployeeTracker/issues"
+  },
+  "homepage": "https://github.com/Dritchie3/EmployeeTracker#readme"
+}
