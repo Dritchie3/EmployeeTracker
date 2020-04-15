@@ -5,6 +5,8 @@ This app project Utilizes MySQL, Inquirer, Express and asciiart-log.  In making 
 
 The github URL for this project: https://github.com/Dritchie3/EmployeeTracker
 
+Link to screentastify Demo: https://drive.google.com/file/d/1n7LXQvid77IcEMhyxPX-7ph9w8DDSw3w/view
+
 
 
  Unit 12 MySQL Homework: Employee Tracker
