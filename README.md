@@ -1,5 +1,10 @@
 # EmployeeTracker#
 
+This app project Utilizes MySQL, Inquirer, Express and asciiart-log.  In making this, I needed to be able to read and write to MySQL tables as well as create the tables to begin with. It utilizes the MySQL "join" to get and set data from the three tables that we created.  The app allows the usser to add an employee, add a department, add a role and modify the role odf an existing employee.  Also, you can view your emplyees, departments and roles. I have added a file called "other.js"  This has the start of some code that would enable the user to be abe to delete employees, roles and departments.  It also would allow the user to view employees by manager and update employees by manager.
+
+
+The github URL for this project: https://github.com/Dritchie3/EmployeeTracker
+
 
 
  Unit 12 MySQL Homework: Employee Tracker
